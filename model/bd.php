@@ -8,7 +8,7 @@ if (strstr($_SERVER['HTTP_HOST'], '51.178.86.117')){
     $password = "oem9Fi_j";
 }else{
 
-    $name = "note";
+    $name = "ticketing";
     $username = "root";
     $password = "";
 }

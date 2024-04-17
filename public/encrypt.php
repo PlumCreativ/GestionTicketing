@@ -1,20 +1,22 @@
 <?php
-require_once("class/bd.php");
+require_once("../model/bd.php");
 
 
 session_start();
 
 // Vérifier si le nom existe déjà
 $userId = htmlspecialchars( $_POST['userId'] );
-$mail = htmlspecialchars( $_POST['mail'] );
 
 $password =  htmlspecialchars($_POST['password']);
 $passwordConfirm = htmlspecialchars( $_POST['passwordConfirm'] );
 
-$req = $db->prepare( 'SELECT * FROM clients WHERE id_clients=:userId' );
+$isUser =  htmlspecialchars($_POST['isUser']);
+
+$observation = "";
+
+$req = $db->prepare( 'SELECT * FROM clients WHERE login=:userId' );
 $req->execute( [':userId'=>$userId] );
 if( $req->rowCount() ) {
-    
     header( 'Location: singin.php?invaliduserId=1' );
     exit();
 }
@@ -24,17 +26,17 @@ if( strlen( $password ) < 12 ) {
     exit();
 }
 
-$email_car = '@';
+// if(  !$isUser ) {
+//     header( 'Location: singin.php?invaliduser=1' );
+//     exit();
+// }
 
-if( !strstr($mail, $email_car) ) {
-    
+$user_carh = '@.com';
+
+if( !strstr($userId, $user_carh) ) {
     header( 'Location: singin.php?invalidmail=1' );
     exit();
 }
-
-$checkLicence = $db->prepare('SELECT num_licence FROM adherent WHERE num_licence=:licence');
-$checkLicence->execute([':licence'=>$licence]);
-$result = $checkLicence->fetch(PDO::FETCH_ASSOC);
 
 // Vérifier le second mot de passe et le confirmer
 if( $password != $passwordConfirm ) {
@@ -49,15 +51,16 @@ $passHash = sodium_crypto_pwhash_str(
 );
 
 $req = $db->prepare( 
-    "INSERT INTO clients( identifiant, password, mail, num_recu, num_licence, adresse, code_postale, ville)
-     VALUES( :userId, :password, :mail)"
+    "INSERT INTO clients( login, password, observation, isUser)
+     VALUES( :userId, :password, :observation, :isUser)"
 );
 
 $isInsertOk = $req->execute([
     ':userId'           => $userId,
-    ':mail'             => $mail,
+    ':observation'      => $observation,
 
-    ':password'         => bin2hex($passHash)
+    ':password'         => bin2hex($passHash),
+    ':isUser'           => $isUser
 ]);
 
 if( !$isInsertOk ) {
@@ -68,9 +71,11 @@ if( !$isInsertOk ) {
     $idUser = $db->lastInsertId();
     $_SESSION['id']             = $idUser;
     $_SESSION['userId']         = $userId;
-    $_SESSION['mail']           = $mail;
+    $_SESSION['observation']    = $observation;
 
     $_SESSION['password']       = $password;
+
+    $_SESSION['isUser']         = $isUser;
 
     header("Location: index.php");
 }

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-require_once("class/bd.php");
+require_once("../model/bd.php");
 
 
 $userId = $_POST['userId'];
 $password = $_POST['password'];
-$sql = $db->prepare("SELECT * FROM clients WHERE id_clients=:userId");
+$sql = $db->prepare("SELECT * FROM clients WHERE login=:userId");
 $sql->execute( [':userId'=>$userId] );
 
 

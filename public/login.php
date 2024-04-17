@@ -2,16 +2,17 @@
 <?php
 session_start();
 // Connexion Ã  la base de données
-require_once("class/bd.php");?>
+require_once("..\model\bd.php");?>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> Note de Frais </title>
-        <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-        <link href="asset/css/style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <link href="css/style.css" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     </head>
 
     <?php
@@ -37,9 +38,9 @@ require_once("class/bd.php");?>
 
             <nav>
 
-                <ul class="secondary">
+                <ul class="secondary" style="margin: 0 !important;">
                     <li class="nav-button">
-                        <a class="btn btn-outline-secondary btn-create px-5" href="singin.php">Sign in</a>
+                        <a class="btn btn-outline-secondary btn-create px-5" href="singin.php">Sing in</a>
                     </li>                                                  
                     <li class="nav-button">
                         <a class="btn btn-outline-secondary btn-create px-5" href="index.php">Menu</a>
@@ -71,7 +72,7 @@ require_once("class/bd.php");?>
 
 
 
-                            <div class="row justify-content-center mb-4">
+                            <div class="row justify-content-center mb-4" >
                                 <div class="col-6">
                                     <H2 class="header-font H-font">Log in</H2>
                                 </div>
@@ -95,8 +96,10 @@ require_once("class/bd.php");?>
                                                 <label for="inputPassword">Hide</label>
                                             </div>
                                         </div>
+
                                         <input type="password" class="form-control border rounded p-2"
                                         id="inputPassword" placeholder="Your password" name="password" required>
+
                                         <div class="d-flex mt-1 justify-content-end">
                                             <a class="link-dark link-underline-opacity-0 " href="#">Forget your password</a>
                                         </div>
@@ -129,7 +132,7 @@ require_once("class/bd.php");?>
 
                     <!-- Button Create account-->
                     <div class="row justify-content-center mb-4">
-                        <P class="p-4 text-center divider-P">Don’t have an account?</P>
+                        <p class="p-4 text-center divider-P">Don’t have an account?</p>
                         <div class="d-grid">
                             <a class="btn btn-outline-secondary btn-create button-H p-2" href="singin.php">Sing up</a>
                         </div>

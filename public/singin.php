@@ -2,15 +2,17 @@
 <?php
 session_start();
 // Connexion Ã  la base de données
-require_once("class/bd.php");?>
+require_once("../model/bd.php");?>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> Create Ticket </title>
-        <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-        <link href="asset/css/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <link href="css\style.css" rel="stylesheet">
+
     </head>
 
 
@@ -18,9 +20,6 @@ require_once("class/bd.php");?>
 
         $errorMessage  = '';
         if( isset( $_GET['invaliduserId'] ) ) {
-            $errorMessage = 'Désolé ! ce identifiant est déjà utilisé.';
-        }
-        if( isset( $_GET['invalidmail'] ) ) {
             $errorMessage = 'Désolé ! ce mail est déjà utilisé.';
         }
 
@@ -30,6 +29,9 @@ require_once("class/bd.php");?>
         if( isset( $_GET['invalidconfirm'] ) ) {
             $errorMessage = 'Erreur sur la confirmation du mot de passe';
         }
+        // if( isset( $_GET['invaliduser'] ) ) {
+        //     $errorMessage = 'Erreur sur le choix de la connexion';
+        // }
 
     ?>
 
@@ -39,7 +41,7 @@ require_once("class/bd.php");?>
 
             <nav>
 
-                <ul>
+                <ul class="secondary" style="margin: 0 !important;">
                     <li class="nav-button">
                         <a class="btn btn-outline-secondary btn-create px-5" href="login.php">Log in</a>
                     </li>
@@ -87,14 +89,8 @@ require_once("class/bd.php");?>
 
                                     <div class="mb-4">
                                         <input type="text" class="form-control border rounded p-2"
-                                        id="userId" placeholder="Your identifiant" name="userId" required>
+                                        id="userId" placeholder="Your email" name="userId" required>
                                     </div>
-
-                                    <div class="mb-4">
-                                        <input type="text" class="form-control border rounded p-2"
-                                        id="mail" placeholder="Your Mail" name="mail" required>
-                                    </div>
-
                                         
                                     <div class="mb-4">
                                         <input type="password" class="form-control border rounded p-2"
@@ -104,6 +100,12 @@ require_once("class/bd.php");?>
                                     <div class="mb-4">
                                         <input type="password" class="form-control border rounded p-2"
                                         id="inputPasswordConfirm" placeholder="Confirm your password" name="passwordConfirm" required>
+                                    </div>
+
+                                    <div class="mb-4 d-flex justify-content-around">
+                                        <label class="g-col-6" for="isUser">Are you Developer</label>
+                                        <input type="checkbox" class=" border rounded p-2"
+                                        id="isUser" name="isUser">
                                     </div>
 
                                 </div>  
@@ -149,7 +151,7 @@ require_once("class/bd.php");?>
                         <!-- Button Create account-->
                         <div class="row justify-content-center mb-4">
                             <div class="d-grid">
-                                <a class="btn btn-outline-secondary btn-create button-H p-2" href="login.php">Log in</a>
+                                <a class="btn btn-outline-secondary btn-create  p-2" href="login.php">Log in</a>
                             </div>
                         </div>
 

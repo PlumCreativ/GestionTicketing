@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-require_once("class/bd.php");?>
+require_once("..\model\bd.php");?>
 
 <html>
 <head>
@@ -9,8 +9,8 @@ require_once("class/bd.php");?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestion de ticketing</title>
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    <link href="asset/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css\style.css" rel="stylesheet">
 </head>
 
     <body>
@@ -23,123 +23,89 @@ require_once("class/bd.php");?>
             ?>
 
 
-                <aside>
+            <aside>
+
+                <nav>
+
+                    <ul style="margin: 0 !important;">
                         
+                    </ul>
+        
+                    <ul style="margin: 0 !important;">
+                        <li class="nav-button">
+                            <a class="btn btn-outline-secondary btn-create px-5" href="userView.html.twig">Users</a>
+                        </li>
+                        <li class="nav-button">
+                            <a class="btn btn-outline-secondary btn-create px-5" href="ticketView.html.twig">Ticket's</a>
+                        </li>                
 
-                    <?php if(isset($_SESSION['num_licence']) || isset($_SESSION['num_recu'])){?>
+                        <li class="nav-button">
+                            <a class="btn btn-outline-secondary btn-create p-2 " href="indexView.html.twig">Menu</a>
+                        </li>
+                                                                    
+                    </ul style="margin: 0 !important;">
+
+                    <ul class="secondary">
+                        <li class="nav-button">
+                            <a class="btn btn-outline-secondary btn-create px-5" href="logoutView.html.twig">Logout</a>
+                        </li>                                                    
+                    </ul>                                                 
+
+                </nav>
+
+                <div class="container-fluid w-100 h-25">
+                    <div class="row justify-content-center mb-5">
+                        <div class=" text-center">
+                            <H1>Gestion de ticketing</H1>
+                        </div>
+                    </div>
+                </div>
                         
-                        <nav>
+                        
+                    <nav>
 
-                            <ul>
-                                
-                            </ul>
-                
-                            <ul>
-                                <li class="nav-button">
-                                    <a class="btn btn-outline-secondary btn-create px-5" href="formular.php">Users</a>
-                                </li>
-                                <li class="nav-button">
-                                    <a class="btn btn-outline-secondary btn-create px-5" href="impressionPage.php">Ticket's</a>
-                                </li>                
+                        <ul class="secondary" style="margin: 0 !important;">
+                            <li class="nav-button">
+                                <a class="btn btn-outline-secondary btn-create px-5" href="logout.php">Logout</a>
+                            </li>                                                    
+                        </ul>                                                 
 
-                                <li class="nav-button">
-                                    <a class="btn btn-outline-secondary btn-create p-2 " href="genpdf.php">Menu</a>
-                                </li>
-                                                                            
-                            </ul>
+                    </nav>
 
-                            <ul class="secondary">
-                                <li class="nav-button">
-                                    <a class="btn btn-outline-secondary btn-create px-5" href="logout.php">Logout</a>
-                                </li>                                                    
-                            </ul>                                                 
-
-                        </nav>
-
-                        <div class="container-fluid w-100 h-25">
-                            <div class="row justify-content-center mb-5">
-                                <div class=" text-center">
-                                    <H1>Gestion de ticketing</H1>
-                                </div>
+                    <div class="container-fluid w-100 h-25">
+                        <div class="row justify-content-center mb-5">
+                            <div class=" text-center">
+                                <H1>Create a ticket</H1>
                             </div>
                         </div>
-                    <?php
-                    } 
-                    else{?>          
-                                
-                            <nav>
-                                <ul>
-                                    <li class="nav-button">
-                                        <a class="btn btn-outline-secondary btn-create px-5" href="formular.php">Create a ticket</a>
-                                    </li>
-                                              
-                                </ul>
+                    </div>
 
-                                <ul class="secondary">
-                                    <li class="nav-button">
-                                        <a class="btn btn-outline-secondary btn-create px-5" href="logout.php">Logout</a>
-                                    </li>                                                    
-                                </ul>                                                 
-
-                            </nav>
-
-                            <div class="container-fluid w-100 h-25">
-                                <div class="row justify-content-center mb-5">
-                                    <div class=" text-center">
-                                        <H1>Create a ticket</H1>
-                                    </div>
-                                </div>
-                            </div>
-                    </aside>
-
-                        <!-- Previous style "Functional"-->
-                        <!-- <div class="d-flex justify-content-evenly">
-                            <div class="d-grid col-2">
-                                <a class="btn btn-outline-secondary btn-create p-2 " href="formular.php">Faire une Note de Frais</a>
-                            </div>
-                            <div class="d-grid col-2">
-                                <a class="btn btn-outline-secondary btn-create p-2 " href="logout.php">Se déconnecter</a>
-                            </div>
-                        </div> -->
+                </div>
+            </aside>
                     
-                        <?php
-                    }
-                    ?>  
-
-
-                <?php
+            <?php
             }else {
             ?>              
                             
                 <aside class="container-fluid">
 
                     <nav>
-
-                        <ul>
+                        <ul style="margin: 0 !important;">
                             <li class="nav-button">
-                                <a class="btn btn-outline-secondary btn-create px-5" href="login.php">Log in</a>
+                                <a class="btn btn-outline-secondary btn-create px-5" href="login.php">
+                                    Log in
+                                </a>
                             </li>
+
                             <li class="nav-button">
-                                <a class="btn btn-outline-secondary btn-create px-5" href="singin.php">Sign in</a>
+                                <a class="btn btn-outline-secondary btn-create px-5" href="singin.php">
+                                    Sign in
+                                </a>
                             </li>                                                      
                         </ul>                                                
-
                     </nav>
 
                 </aside>
-
-
-                            <!-- <div class="d-flex justify-content-evenly">
-                                <div class="d-grid col-2">
-                                    <a class="btn btn-outline-secondary btn-create p-2 " href="login.php">Log in</a>
-                                </div>
-
-                                <div class="d-grid col-2">
-                                    <a class="btn btn-outline-secondary btn-create p-2 " href="singin.php">Sing in</a>
-
-                                </div>
-
-                            </div> -->
                         
             <?php 
             }
