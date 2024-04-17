@@ -1,0 +1,132 @@
+{% extends 'Pagelayout.twig' %}
+
+{%  block body %}
+
+  <h2><span id="nbusers"></span> Utilisateur(s)</h2>
+
+
+  {% if listUsers is defined %}
+  
+      <div class="row">
+          <div class="col-12">
+          <div id="toolbar">
+              <button id="btnShowActive" class="btn btn-secondary" 
+                data-url="{{ pathRoot ~ 'users/listusersBS' }}"
+                data-field="isactive"
+                data-val="0"
+              >Voir les utilisateurs actifs</button>
+
+              <button id="btnShowAll" class="btn btn-secondary" 
+                data-url="{{ pathRoot ~ 'users/listusersBS' }}"
+                data-field="showall"
+                data-val="0"
+              >Voir tous les utilisateurs</button>
+
+            </div>
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+                </table>
+          </div>
+      </div>
+      <script>
+
+        // your custom ajax request here
+        function ajaxRequest(params) {
+          const url = $('#table').data('url')
+
+          $.get(url + '/?' + $.param(params.data))
+            .then(function (res) {
+              const data = JSON.parse(res)
+              console.log( data.total )
+              document.querySelector('#nbusers').innerHTML = data.total
+              params.success( data )
+            })
+        }
+
+
+        function queryParams( params ) {
+            params.isactive = document.querySelector('#btnShowActive').dataset.val
+            params.showall = document.querySelector('#btnShowAll').dataset.val
+            if( params.isactive == 1 ) {
+              params.offset = 0
+            }
+            document.querySelector('#btnShowAll').dataset.val = 0
+            document.querySelector('#btnShowActive').dataset.val = 0
+            return params
+        }
+
+
+        function profilFormatter(value, row) 
+        {
+          return '<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'users/updateprofil/id/' }}' + row.id + '">Completer le profil</a>'
+        }
+
+
+        function activeFormatter(value, row)
+        {
+          const isChecked = value == 1 ? 'checked' : ''
+          const isActif = value == false ? 0 : 1
+          return ['<div class="form-check form-switch">',
+                '<input class="form-check-input active-line" data-isactif="' + isActif + '" data-url="{{ pathRoot ~ 'users/setuserBS/id/' }}' + row.id + '/isactif/" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
+                '</div>'].join('')
+        }
+
+
+        function adminFormatter(value, row)
+        {
+          const isChecked = value == 1 ? 'checked' : ''
+          const isAdmin = value == false ? 0 : 1
+          return ['<div class="form-check form-switch">',
+                '<input class="form-check-input admin-line" data-isadmin="' + isAdmin + '" data-url="{{ pathRoot ~ 'users/setadmin/id/' }}' + row.id + '" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
+                '</div>'].join('')
+        }
+      </script>
+
+ 
+{#
+    <ul>
+    {% for user in listUsers %}
+      <li>
+        <a href="{{ pathRoot ~ 'users/deleteuser/id/' ~ user.id }}">x</a>
+        {{ user.id }} : <a href="{{ pathRoot ~ 'users/user/id/' ~ user.id }}">{{ user.login }}</a>
+       
+       &emsp;{% if user.isActive %}
+          Actif <a href="{{ pathRoot ~ 'users/setuser/id/' ~ user.id ~ '/isactif/0' }}">Desactiver</a>
+        {% else %}
+          <a href="{{ pathRoot ~ 'users/setuser/id/' ~ user.id ~ '/isactif/1' }}">Activer</a> Inactif 
+        {% endif %}
+
+        &emsp;<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'users/updateprofil/id/' ~ user.id }}">Completer le profil</a>
+      </li>
+    {% endfor %}
+    </ul>#}
+    
+  {% endif %}
+
+{%  endblock %}
