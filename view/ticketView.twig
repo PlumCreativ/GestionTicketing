@@ -1,26 +1,15 @@
-{% extends 'Pagelayout.twig' %}
+{% extends 'view\indexView.twig' %}
 
 {%  block body %}
 
-  <h2><span id="nbusers"></span> Utilisateur(s)</h2>
+  <h2><span id="tickets"></span> Ticket's(s)</h2>
 
 
-  {% if listUsers is defined %}
+  {% if listTicket is defined %}
   
       <div class="row">
           <div class="col-12">
           <div id="toolbar">
-              <button id="btnShowActive" class="btn btn-secondary" 
-                data-url="{{ pathRoot ~ 'users/listusersBS' }}"
-                data-field="isactive"
-                data-val="0"
-              >Voir les utilisateurs actifs</button>
-
-              <button id="btnShowAll" class="btn btn-secondary" 
-                data-url="{{ pathRoot ~ 'users/listusersBS' }}"
-                data-field="showall"
-                data-val="0"
-              >Voir tous les utilisateurs</button>
 
             </div>
                 <table class="table table-bordered">
@@ -54,7 +43,8 @@
                 </table>
           </div>
       </div>
-      <script>
+
+      {# <script>
 
         // your custom ajax request here
         function ajaxRequest(params) {
@@ -107,26 +97,8 @@
                 '</div>'].join('')
         }
       </script>
-
- 
-{#
-    <ul>
-    {% for user in listUsers %}
-      <li>
-        <a href="{{ pathRoot ~ 'users/deleteuser/id/' ~ user.id }}">x</a>
-        {{ user.id }} : <a href="{{ pathRoot ~ 'users/user/id/' ~ user.id }}">{{ user.login }}</a>
-       
-       &emsp;{% if user.isActive %}
-          Actif <a href="{{ pathRoot ~ 'users/setuser/id/' ~ user.id ~ '/isactif/0' }}">Desactiver</a>
-        {% else %}
-          <a href="{{ pathRoot ~ 'users/setuser/id/' ~ user.id ~ '/isactif/1' }}">Activer</a> Inactif 
-        {% endif %}
-
-        &emsp;<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'users/updateprofil/id/' ~ user.id }}">Completer le profil</a>
-      </li>
-    {% endfor %}
-    </ul>#}
     
-  {% endif %}
+  #}
+  {# {% endif %} #} 
 
 {%  endblock %}

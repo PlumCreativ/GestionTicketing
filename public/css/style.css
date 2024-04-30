@@ -110,26 +110,9 @@ footer{
     margin-left: 20%;
 }
 
-.table-content{
-    border-collapse: collapse;
-    margin: 25px 0px;
-    font-size: 0.9em;
-    min-width: 400px;
-}
-
 .dominant-color{
     background-color: #CCFFCC;
     padding: 5px;
-}
-
-.table-content td{
-    background-color: #CCFFCC;
-    text-align: left;
-}
-
-.table-content th,
-.table-content td{
-    padding: 25px 15px;
 }
 
 .complet-space{
